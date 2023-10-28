@@ -475,6 +475,9 @@ class User extends \Illuminate\Foundation\Auth\User
      */
     public function log(int $type): self
     {
+        if (!config('logging.enabled')) {
+            return $this;
+        }
         UserLog::create([
             'user_id' => $this->id,
             'type_id' => $type,
